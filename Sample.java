@@ -45,7 +45,7 @@ public class Sample
             f = new Font("Courier New", Font.PLAIN, 13);
             FontMetrics fm = getFontMetrics(f);
             font_h = fm.getHeight();
-            font_w = fm.stringWidth("|");
+            font_w = fm.stringWidth("_");
             h = (font_h) * ROWS;
             w = (font_w) * COLUMNS; 
             System.out.println("size: " + w + "x" + h + "."); 
@@ -94,6 +94,11 @@ public class Sample
                         }
                         break;
 
+                    case KeyEvent.VK_DELETE:
+                        char_buffer[cur_row][cur_col] = 0;
+                        break;
+
+
                     case KeyEvent.VK_CONTROL:
                         isCtrlPressed = true; 
                         break;
@@ -115,7 +120,7 @@ public class Sample
                     case KeyEvent.VK_S:
                         if (isCtrlPressed) {
                             String name = UUID.randomUUID().toString() + ".txt";                            
-                            System.out.println("Writing to " + name + ".");
+                            System.out.println("Writing to " + name);
                             try {
                                 File f = new File(name);
                                 FileOutputStream fos = new FileOutputStream(f);
@@ -123,8 +128,7 @@ public class Sample
                                 for (int i = 0; i < ROWS; ++i) {
                                     for (int j = 0; j < COLUMNS; ++j) {
                                         char c = char_buffer[i][j];
-                                        if (!(c >= ' ' && c <= 'z')) c = ' '; 
-                                        System.out.println("printing '" + c + "'");
+                                        if (!(c >= ' ' && c <= '~')) c = ' '; 
                                         fw.write(c);
                                         if (j == COLUMNS - 1) {
                                             fw.write('\r');
@@ -157,12 +161,13 @@ public class Sample
                     char c = evt.getKeyChar();
                     Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
 
-                    if (!Character.isISOControl(c) &&
-                        (c != KeyEvent.CHAR_UNDEFINED) &&
-                        block != null &&
-                        block != Character.UnicodeBlock.SPECIALS &&
-                        c != ' ') {
-                        char_buffer[cur_row][cur_col] = evt.getKeyChar();
+                    if (Character.isISOControl(c) ||
+                        (c == KeyEvent.CHAR_UNDEFINED) ||
+                        block == null ||
+                        block == Character.UnicodeBlock.SPECIALS ||
+                        c == ' ') {
+                    } else {
+                        char_buffer[cur_row][cur_col] = c;
                         ++cur_col;
                         if (cur_col == COLUMNS) {
                             cur_col = 0;
@@ -207,9 +212,11 @@ public class Sample
                     sg.setFont(f);
                     if (char_buffer[i][j] == 0) {
                         sg.drawString(" ", x_base, y_bottom);
+                    } else if (char_buffer[i][j] == '_') {
+                        sg.drawLine(x_base, y_bottom - 1, x_bottom, y_bottom - 1);
                     } else {
                         sg.drawString("" + char_buffer[i][j], x_base, y_bottom - 3);
-                    }
+                    } 
                 }
             }    
             g.drawImage(surface, 0, 0, null);    
