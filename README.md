@@ -2,11 +2,11 @@
 A drawing thingy
 
 Usage: 
-CTRL+S -> SAVE.
-CTRL+C -> CLEAR.
-DEL -> DELETE CURRENT CHARACTER.
-UP, DOWN, LEFT, RIGHT -> MOVE AROUND.
-SPACE -> KINDA LIKE MOVE AROUND.
+- CTRL+S -> SAVE.
+- CTRL+C -> CLEAR.
+- DEL -> DELETE CURRENT CHARACTER.
+- UP, DOWN, LEFT, RIGHT -> MOVE AROUND.
+- SPACE -> KINDA LIKE MOVE AROUND.
 
 ![#1](kindacool.png)<br />
 [raw](https://raw.githubusercontent.com/dmitrymakhnin/DrawingThingy/master/kindacool.png)
