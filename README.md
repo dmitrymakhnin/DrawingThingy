@@ -1,7 +1,12 @@
 # DrawingThingy
 A drawing thingy
 
-Usage: press ctrl+s to save, ctrl+c to clear... up, down, left right to navigate around, space also works.
+Usage: 
+CTRL+S -> SAVE.
+CTRL+C -> CLEAR.
+DEL -> DELETE CURRENT CHARACTER.
+UP, DOWN, LEFT, RIGHT -> MOVE AROUND.
+SPACE -> KINDA LIKE MOVE AROUND.
 
 ![#1](kindacool.png)<br />
 [raw](https://raw.githubusercontent.com/dmitrymakhnin/DrawingThingy/master/kindacool.png)
